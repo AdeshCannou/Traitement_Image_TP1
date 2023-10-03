@@ -18,6 +18,9 @@ margin_x, margin_y = 200, 200
 
 for i in fragment_data:
     index, center_x, center_y, angle = i  # Convertir en virgule flottante
+    
+    if index in fragment_skip:
+        continue
 
     fragment_filename = os.path.join(path, f"frag_eroded_{int(index)}.png")
 
