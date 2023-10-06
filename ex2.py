@@ -12,7 +12,7 @@ da = float(input("Choose da "))
 delta = np.array([dx, dy, da])
 
 def is_solution(sol, test):
-    return abs(sol - test) < delta
+    return all(abs(sol - test) < delta)
 
 fragment_data = { el[0]:np.array([el[1], el[2], el[3]], dtype=float) for el in [line.strip().split() for line in open("fragments.txt", "r")]}
 compared = {  el[0]:np.array([el[1], el[2], el[3]], dtype=float) for el in [line.strip().split() for line in open("solution.txt", "r")]}
@@ -36,7 +36,7 @@ for i in fragment_data:
         total -= fragment_height * fragment_width
     else:
         div += fragment_width * fragment_height
-        if all(is_solution(fragment_data[i], compared[i])):
+        if is_solution(fragment_data[i], compared[i]):
             total += fragment_height * fragment_width
 
 
