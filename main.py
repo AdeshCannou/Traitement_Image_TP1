@@ -11,14 +11,16 @@ fragment_skip = [line.strip().split() for line in open("fragments_s.txt", "r")]
 img_width, img_height = 2000, 1500
 
 # Créer une image vide de la taille de l'image de sortie
-image = np.zeros((img_height, img_width, 3), np.uint8)  # Utilisez 3 canaux pour RGB (fond noir, chaque pixel à zéro)
+image = np.zeros(
+    (img_height, img_width, 3), np.uint8
+)  # Utilisez 3 canaux pour RGB (fond noir, chaque pixel à zéro)
 
 # Placer les fragments dans l'image de sortie avec une marge à partir de (200, 200)
 margin_x, margin_y = 200, 200
 
 for i in fragment_data:
     index, center_x, center_y, angle = i
-    
+
     if index in fragment_skip:
         continue
 
@@ -29,6 +31,7 @@ for i in fragment_data:
 
     fragment_height, fragment_width, _ = fragment.shape
 
+    # Rotation du fragment
     M = cv.getRotationMatrix2D(
         (fragment_width / 2, fragment_height / 2),
         float(angle),
